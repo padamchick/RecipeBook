@@ -17,10 +17,10 @@ export class ShoppingEditComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  add(ingredient: Ingredient) {
+  addIngredient(ingredient: Ingredient) {
     const name = this.nameInputRef.nativeElement.value;
     const amount = this.amountInputRef.nativeElement.value;
-    this.shoppingListService.newIngredient(new Ingredient(name, amount));
+    this.shoppingListService.addIngredient(new Ingredient(name, amount));
   }
 
 
