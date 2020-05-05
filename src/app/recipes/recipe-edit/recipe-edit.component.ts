@@ -86,7 +86,7 @@ export class RecipeEditComponent implements OnInit {
       this.router.navigate(['../', newIndex], {relativeTo: this.route, queryParamsHandling: 'preserve'})
     }
 
-    console.log(this.recipeForm.value);
+    // console.log(this.recipeForm.value);
   }
 
   onAddIngredient() {

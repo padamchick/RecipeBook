@@ -4,6 +4,7 @@ import { catchError, tap } from "rxjs/operators";
 import { throwError, Subject, BehaviorSubject } from "rxjs";
 import { User } from "./user.model";
 import { Router } from "@angular/router";
+import { environment } from 'src/environments/environment';
 
 export interface AuthResponseData {
   idToken: string;
@@ -24,7 +25,7 @@ export class AuthService {
   signup(email: string, password: string) {
     return this.http
       .post<AuthResponseData>(
-        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAFClAhhAiNn5mOmlhFvBOgGThxjai93S0",
+        'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + environment.firebaseAPIKey,
         {
           email: email,
           password: password,
@@ -37,7 +38,7 @@ export class AuthService {
   login(email: string, password: string) {
     return this.http
       .post<AuthResponseData>(
-        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAFClAhhAiNn5mOmlhFvBOgGThxjai93S0",
+        'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' + environment.firebaseAPIKey,
         {
           email: email,
           password: password,
@@ -83,7 +84,7 @@ export class AuthService {
   }
 
   autoLogout(expirationDuration: number) {
-    console.log(`Token expires in: ${expirationDuration/1000} s`);
+    // console.log(`Token expires in: ${expirationDuration/1000} s`);
     this.tokenExpirationTimer = setTimeout(() => {
       this.logout();
     }, expirationDuration);
