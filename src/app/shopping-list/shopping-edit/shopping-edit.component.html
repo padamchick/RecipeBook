@@ -10,7 +10,7 @@
           <span class="help-block" *ngIf="!name.valid && name.touched">This field is required!</span>
         </div>
 
-        <div class="col-sm-3 form-group" [ngClass]="{'has-error': !amount.valid && amount.touched}">
+        <div class="col-sm-2 form-group" [ngClass]="{'has-error': !amount.valid && amount.touched}">
           <label for="amount">Amount</label>
           <input type="number" id="amount" class="form-control"
           name="amount"
@@ -20,6 +20,12 @@
           [pattern]="'^[1-9]+[0-9]*$'">
           <span class="help-block" *ngIf="amount.invalid && amount.touched && !amount.errors.pattern">This field is required!</span>
           <span class="help-block" *ngIf="amount.invalid && amount.touched && amount.errors.pattern">Enter a valid number!</span>
+        </div>
+
+        <div class="col-sm-2 form-group">
+          <label for="unit">Unit</label>
+          <input type="text" id="unit" class="form-control"
+          name="unit" ngModel>
         </div>
 
       </div>

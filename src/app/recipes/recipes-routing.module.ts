@@ -1,4 +1,3 @@
-import { NgModel } from "@angular/forms";
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { RecipesComponent } from './recipes.component';
@@ -10,7 +9,7 @@ import { RecipesResolverService } from './recipes-resolver.service';
 
 const routes: Routes = [
   {
-    path: 'recipes',
+    path: '',
     component: RecipesComponent,
     canActivate: [AuthGuard],
     children: [
