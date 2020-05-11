@@ -31,9 +31,9 @@
       </div>
         <div class="row">
           <div class="col-xs-12">
-            <button class="btn btn-success col-xs-1" type="submit" [disabled]="!form.valid">{{ editMode ? 'Save' : 'Add'}}</button>
-            <button class="btn btn-danger col-xs-1" type="button" [disabled]="!editMode" (click)="onDelete()">Delete</button>
-            <button class="btn btn-primary col-xs-1 " type="button"
+            <button class="btn btn-success col-xs-3" type="submit" [disabled]="!form.valid">{{ editMode ? 'Save' : 'Add'}}</button>
+            <button class="btn btn-danger col-xs-3" type="button" [disabled]="!editMode" (click)="onDelete()">Delete</button>
+            <button class="btn btn-primary col-xs-3" type="button"
               (click)="onClear()">Clear</button>
               <!-- <button class="btn default col-xs-1" type="button" (click)="logForm()">Log</button> -->
           </div>
