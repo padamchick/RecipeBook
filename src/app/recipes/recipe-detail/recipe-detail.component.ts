@@ -4,6 +4,7 @@ import { RecipeService } from '../recipe.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { Ingredient } from 'src/app/shared/ingredient.model';
+import { DataStorageService } from 'src/app/shared/data-storage.service';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -19,7 +20,8 @@ export class RecipeDetailComponent implements OnInit {
   constructor(
     private recipeService: RecipeService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private dataService: DataStorageService
   ) {}
 
   ngOnInit(): void {
@@ -41,6 +43,7 @@ export class RecipeDetailComponent implements OnInit {
 
   onDeleteRecipe() {
     this.recipeService.deleteRecipe(this.id);
+    this.dataService.storeRecipes();
     this.router.navigate(['../'], { relativeTo: this.route });
   }
 }

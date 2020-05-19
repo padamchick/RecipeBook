@@ -36,3 +36,7 @@ img {
 .card {
   padding: 15px;
 }
+
+.mat-tap-fix {
+  min-height: 350px;
+}

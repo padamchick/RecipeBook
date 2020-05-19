@@ -1,0 +1,11 @@
+.text-orange {
+  color: rgb(255, 169, 2);
+}
+
+img {
+  max-height: 350px;
+}
+
+p {
+  font-size: 40px;
+}
