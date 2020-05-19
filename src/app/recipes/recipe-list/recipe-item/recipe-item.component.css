@@ -1,0 +1,12 @@
+.list-group-item {
+  margin: 2px;
+}
+
+.list-group-item.active{
+  background-color: rgb(5, 64, 119);
+border-color: rgb(5, 64, 119);
+}
+
+img {
+  margin-left: 10px;
+}

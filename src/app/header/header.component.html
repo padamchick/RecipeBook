@@ -1,4 +1,61 @@
-<nav class="navbar navbar-default navbar-fixed-top">
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" [ngClass]="{hidden: !(isHandset$ | async)}"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+    <mat-toolbar class="theme-accent-dark">Menu</mat-toolbar>
+    <mat-nav-list role="navigation">
+      <a mat-list-item *ngIf="!isAuthenticated" routerLinkActive="router-link-active" routerLink="/auth">Login</a>
+      <a mat-list-item *ngIf="isAuthenticated" routerLinkActive="router-link-active" routerLink="/recipes">Recipes</a>
+      <a mat-list-item *ngIf="isAuthenticated" routerLinkActive="router-link-active" routerLink="/shopping-list" >Shopping List</a>
+      <a mat-list-item *ngIf="isAuthenticated" routerLinkActive="router-link-active" (click)="onLogout()">Logout</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar class="theme-accent-dark">
+
+
+      <!-- <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button> -->
+
+        <button fxHide.gt-xs mat-icon-button (click)="drawer.toggle()">
+         <mat-icon>menu</mat-icon>
+       </button>
+       <a routerLink="/">Recipe Book</a>
+
+          <div fxFlex fxLayout fxLayoutAlign="flex-start" fxLayoutGap="15px" fxHide.lt-sm>
+
+          <a *ngIf="isAuthenticated" routerLinkActive="active" routerLink="/recipes">
+            <mat-icon class="icon">menu_book</mat-icon>
+            <span class="label">Recipes</span>
+          </a>
+          <a *ngIf="isAuthenticated" routerLinkActive="active" routerLink="/shopping-list">
+            <mat-icon class="icon">shopping_cart</mat-icon>
+            <span class="label">Shopping List</span>
+          </a>
+        </div>
+
+        <div fxLayoutAlign="flex-end" fxHide.lt-sm>
+          <a *ngIf="!isAuthenticated" routerLinkActive="active" routerLink="/auth">
+            <mat-icon class="icon">lock</mat-icon>
+            <span class="label">Login</span>
+          </a>
+          <a style="cursor: pointer;" *ngIf="isAuthenticated" (click)="onLogout()">
+            <mat-icon class="icon">input</mat-icon>
+            <span class="label">Logout</span>
+          </a>
+        </div>
+
+
+    </mat-toolbar>
+    <ng-content></ng-content>
+    <!-- Add Content Here -->
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+
+
+<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light" fxLayoutGap="10px">
   <div class="container">
     <div class="navbar-header">
       <a routerLink="/" class="navbar-brand">Recipe Book</a>
@@ -15,9 +72,7 @@
           <a style="cursor: pointer;" (click)="onLogout()">Logout</a>
         </li>
         <li class="dropdown" appDropdown *ngIf="isAuthenticated">
-          <a style="cursor: pointer;" class="dropdown-toggle" role="button"
-            >Manage <span class="caret"></span
-          ></a>
+          <a style="cursor: pointer;" class="dropdown-toggle" role="button">Manage <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li>
               <a style="cursor: pointer;" (click)="onSaveData()">Save Data</a>
@@ -30,4 +85,4 @@
       </ul>
     </div>
   </div>
-</nav>
+</nav> -->

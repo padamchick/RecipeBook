@@ -1,8 +1,40 @@
-.btn {
-  margin-right: 4px;
-  margin-bottom: 4px;
+.example-form {
+  min-width: 200px;
+  max-width: auto;
+  width: 100%;
 }
 
-.col-xs-10 {
-  margin-bottom: 5px;
+img {
+  display: flex;
+  max-width: 100%;
+  height: auto;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+button {
+  margin: 5px 5px 10px;
+}
+
+button:focus,
+button:active:focus,
+button.active:focus {
+  outline: none !important;
+  outline-style: none !important;
+}
+
+mat-form-field {
+  display: block;
+}
+
+textarea[cdktextareaautosize].mat-input-element {
+  overflow: hidden;
+}
+
+.card {
+  padding: 10px 25px 0 10px;
 }

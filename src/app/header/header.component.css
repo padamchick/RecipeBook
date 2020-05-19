@@ -1,1 +1,54 @@
+.sidenav-container {
+  height: 100%;
+}
 
+.sidenav {
+  width: 200px;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.hidden {
+  display: none;
+}
+
+mat-toolbar a {
+  display: inline-block;
+  margin: 1px 20px 0 0px;
+  color: white;
+  text-decoration: none;
+}
+
+mat-toolbar a:hover, a:active {
+  color: rgb(214, 214, 214);
+}
+
+.icon {
+  /* display: inline-block; */
+  height: 30px;
+  margin-right: 5px;
+  /* padding-right: 10px; */
+  /* text-align: center; */
+  vertical-align: middle;
+  /* width: 15%; */
+}
+
+.label {
+  /* display: inline-block; */
+  line-height: 30px;
+  /* margin: 5; */
+  /* width: 85%; */
+}
+
+button:focus, button:active:focus, button.active:focus {
+  outline: none !important;
+  outline-style: none !important;
+  }
+
+  ng-content {
+
+  }

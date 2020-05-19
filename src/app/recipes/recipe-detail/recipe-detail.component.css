@@ -1,0 +1,22 @@
+button:focus, button:active:focus, button.active:focus {
+  outline: none !important;
+  outline-style: none !important;
+  }
+
+  table {
+    width: 100%;
+  }
+
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+
+  mat-icon {
+    margin-right: 7px;
+  }
+
+  img {
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }

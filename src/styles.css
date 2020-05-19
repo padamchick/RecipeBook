@@ -1,1 +1,78 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+:root {
+  --th-primary-dark: #000000;
+  --th-primary: #202122;
+  --th-primary-light: #6d6d6d;
+  --th-accent-dark: rgb(5, 64, 119);
+  --th-accent: #4499E9;
+  --th-accent-light: rgb(114, 184, 250);
+  --th-disabled: #20222380;
+  --th-background: linear-gradient(to bottom, #FFFFFF 192px, #ECE9E6) fixed;
+  --text-primary: white;
+  --text-accent: white;
+  --green: rgb(25, 192, 53);
+  --group-b: #FFB5A8;
+  --group-c: #8FF2FF;
+  --group-d: #FFD375;
+  --group-e: #82FFC8;
+}
+
+.color-bg {
+  background: var(--background) !important;
+  color: var(--text-primary) !important;
+}
+
+.theme-primary-dark {
+  background: var(--th-primary-dark) !important;
+  color: var(--text-primary) !important;
+}
+
+.theme-primary {
+  background: var(--th-primary) !important;
+  color: var(--text-primary) !important;
+}
+
+.theme-primary-light {
+  background: var(--th-primary-light) !important;
+  color: var(--text-primary) !important;
+}
+
+.theme-accent-dark {
+  background: var(--th-accent-dark) !important;
+  color: var(--text-accent) !important;
+}
+
+.theme-accent {
+  background: var(--th-accent) !important;
+  color: var(--text-accent) !important;
+}
+
+.theme-accent-reversed {
+  color: var(--th-accent) !important;
+  background: var(--text-accent) !important;
+}
+
+.theme-accent-light {
+  background: var(--th-accent) !important;
+  color: var(--text-accent) !important;
+}
+
+.theme-disabled {
+  background: var(--th-disabled) !important;
+  color: black !important
+}
+
+.mat-success {
+  background: var(--green) !important;
+  color: var(--text-accent) !important;
+}
+
+.mat-success-icon {
+  color: var(--green) !important;
+}
+
+
