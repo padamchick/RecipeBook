@@ -1,0 +1,14 @@
+button {
+  width: 100%;
+}
+
+.form-group {
+  padding: 5px
+}
+
+.form-control:focus {
+  border-color: rgba(5, 64, 119, 0.5);
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(5, 64, 119, 0.5);
+}
+

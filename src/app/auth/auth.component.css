@@ -1,3 +1,38 @@
 button {
   margin-right: 4px;
 }
+
+img {
+  max-height: 250px;
+}
+
+:host ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+  stroke: rgb(5, 64, 119);
+}
+
+.mat-spinner {
+  margin: 0 auto;
+}
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.overlay{
+  height:100vh;
+  width:100%;
+  background-color:rgba(0, 0, 0, 0.286);
+  z-index:    10;
+  top:        0;
+  left:       0;
+  position:   fixed;
+}
+
+.card {
+  padding: 15px;
+}

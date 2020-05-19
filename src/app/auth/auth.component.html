@@ -1,31 +1,27 @@
-<div class="row">
-  <div class="col-xs-12 col-md-6 col-md-offset-3">
-    <!-- <div class="alert alert-danger" *ngIf="error">
-      <p>{{ error }}</p>
-    </div> -->
-    <app-alert
-    [message]="error" *ngIf="error" (close)="onHandleError()"></app-alert>
-    <div *ngIf="isLoading" style="text-align: center;">
-      <app-loading-spinner></app-loading-spinner>
-    </div>
-    <form #f="ngForm" (ngSubmit)="onSubmit(f)" *ngIf="!isLoading">
-      <!-- <div class="form-group" [ngClass]="{'has-error': error}"> -->
-      <div class="form-group">
-        <label for="email">E-Mail</label>
-        <input type="email" id="email" class="form-control"
-        ngModel name="email" required #email="ngModel"/>
-        <!-- <span class="help-block" *ngIf="error">{{ error }}</span> -->
-      </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" class="form-control"
-        ngModel name="password" required >
-      </div>
-      <div>
-        <button class="btn btn-primary" type="submit" [disabled]=!f.valid>{{ isLoginMode ? 'Login' : 'Sign Up'}}</button>
-        <button class="btn btn-primary" type="button" (click)="onSwitchMode()">Switch to {{ isLoginMode ? 'Sign Up' : 'Login'}}</button>
-      </div>
-    </form>
-  </div>
-</div>
+  <div class="row">
+    <div class="col-xs-8 offset-xs-2 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
 
+      <div *ngIf="!isLoading">
+        <div class="row">
+          <div fxFlex fxLayout="column" fxLayoutAlign="center center">
+            <img src="https://i.imgur.com/e8KLaym.png" alt="recipe-book" class="img-fluid">
+            <p class="display-4">{{ loginMode ? 'Login' : 'Sign Up' }}</p>
+          </div>
+        </div>
+        <mat-tab-group mat-stretch-tabs (selectedTabChange)="onChangeMode($event)">
+          <mat-tab label="Log In">
+            <app-login></app-login>
+          </mat-tab>
+          <mat-tab label="Sign Up">
+            <app-register></app-register>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+
+      <div *ngIf="isLoading" class="overlay">
+        <div class="center">
+          <mat-spinner diameter="200"></mat-spinner>
+        </div>
+      </div>
+    </div>
+  </div>

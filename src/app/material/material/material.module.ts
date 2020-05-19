@@ -10,6 +10,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatTableModule} from '@angular/material/table';
 import {MatInputModule} from '@angular/material/input';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 const materialComponents = [
   MatCardModule,
@@ -22,7 +23,8 @@ const materialComponents = [
   MatDividerModule,
   MatTableModule,
   MatInputModule,
-  MatExpansionModule
+  MatExpansionModule,
+  MatProgressSpinnerModule
 ]
 
 @NgModule({

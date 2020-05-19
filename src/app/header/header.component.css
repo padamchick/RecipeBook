@@ -49,6 +49,3 @@ button:focus, button:active:focus, button.active:focus {
   outline-style: none !important;
   }
 
-  ng-content {
-
-  }

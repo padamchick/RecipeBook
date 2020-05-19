@@ -12,12 +12,6 @@
   <mat-sidenav-content>
     <mat-toolbar class="theme-accent-dark">
 
-
-      <!-- <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async">
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-      </button> -->
-
         <button fxHide.gt-xs mat-icon-button (click)="drawer.toggle()">
          <mat-icon>menu</mat-icon>
        </button>
@@ -45,7 +39,6 @@
             <span class="label">Logout</span>
           </a>
         </div>
-
 
     </mat-toolbar>
     <ng-content></ng-content>
