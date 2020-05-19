@@ -11,24 +11,30 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
 ## Screenshots
-![Auth page](https://i.imgur.com/NHBYDP9.jpg)
-![Auth message](https://i.imgur.com/F8U8VZz.jpg)
-![Recipes](https://i.imgur.com/CvBti5J.jpg)
-![Edit recipes](https://i.imgur.com/Tv3mRT9.jpg)
-![Manage recipes](https://i.imgur.com/PNFmFoQ.jpg)
-![Shopping list](https://i.imgur.com/NxnYtHe.jpg)
+![Login page](https://i.imgur.com/Au00R73.png)
+![Recipes](https://i.imgur.com/AdRDdVW.jpg)
+![Recipes-part2](https://i.imgur.com/oqlFSCO.png)
+![Edit recipes](https://i.imgur.com/sg5QsbJ.png)
+![Responsive](https://i.imgur.com/yf5oxAw.png)
+![Responsive2](https://i.imgur.com/I2XCYtt.png)
+![Responsive3](https://i.imgur.com/5VlvJ53.png)
+![ResponsiveMenu](https://i.imgur.com/obr2muY.png)
+
 
 ## Technologies
-* Angular 9
+* Angular 9 & Material
 * Firebase
-* Bootstrap 3
+* Bootstrap 4
 
 ## Features
 * Saving/fetching data to/from Firebase database
 * JWT authentication
 * Adding/editing/deleting recipes
-* Forms validation
-* Users with different roles and diffrent content displayed
+* Responsiveness
+
+## Soon
+* Shopping List section
+* Migration to MySQL database
 
 ## Status
 Project is: in progress

@@ -6,10 +6,10 @@
   width: 200px;
 }
 
-.mat-toolbar.mat-primary {
+.mat-toolbar {
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 15;
 }
 
 .hidden {
