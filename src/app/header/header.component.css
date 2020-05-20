@@ -1,5 +1,6 @@
 .sidenav-container {
   height: 100%;
+  background: var(--th-background) !important;
 }
 
 .sidenav {
@@ -16,36 +17,66 @@
   display: none;
 }
 
-mat-toolbar a {
-  display: inline-block;
-  margin: 1px 20px 0 0px;
-  color: white;
-  text-decoration: none;
+mat-toolbar a.mat-button {
+  color: rgb(223, 223, 223);
 }
 
-mat-toolbar a:hover, a:active {
-  color: rgb(214, 214, 214);
+mat-toolbar a:hover,
+a:active {
+  color: rgb(255, 255, 255);
 }
 
-.icon {
-  /* display: inline-block; */
+mat-nav-list a:hover,
+a:active {
+  color: black;
+}
+
+/* .icon {
   height: 30px;
   margin-right: 5px;
-  /* padding-right: 10px; */
-  /* text-align: center; */
-  vertical-align: middle;
-  /* width: 15%; */
-}
+  vertical-align: middle; */
+/* display: inline-block; */
+/* padding-right: 10px; */
+/* text-align: center; */
+/* width: 15%; */
+/* } */
 
-.label {
-  /* display: inline-block; */
+/* .label {
+
   line-height: 30px;
-  /* margin: 5; */
-  /* width: 85%; */
+  font-size: 15px; */
+/* display: inline-block; */
+/* margin: 5; */
+/* width: 85%; */
+/* } */
+
+.icon {
+  margin-right: 5px;
+  height: 25px;
 }
 
-button:focus, button:active:focus, button.active:focus {
+a:hover {
+  color: white;
+  text-decoration: none;
+  background-color: rgb(5, 64, 119);
+}
+
+button:focus,
+button:active:focus,
+button.active:focus {
   outline: none !important;
   outline-style: none !important;
-  }
 
+}
+
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.toolbar-header {
+  color: white;
+  font-size: 25px;
+  font-weight: bold;
+  margin-right: 15px;
+}

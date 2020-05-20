@@ -14,6 +14,7 @@ import { map, shareReplay } from 'rxjs/operators';
 export class HeaderComponent implements OnInit, OnDestroy {
   private userSub: Subscription;
   isAuthenticated = false;
+
   routes = [
     { name: 'Authentication', route: '/auth', needAuthentication: false },
     { name: 'Recipes', route: '/recipes', needAuthentication: true },
