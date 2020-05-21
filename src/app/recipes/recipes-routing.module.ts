@@ -8,6 +8,7 @@ import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { RecipesResolverService } from './recipes-resolver.service';
 import { RoleGuard } from './role.guard';
+import { CanDeactivateGuard } from './recipe-edit/can-deactivate.guard';
 
 const routes: Routes = [
   {
@@ -17,7 +18,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: '', component: RecipeStartComponent },
-      { path: 'new', component: RecipeEditComponent, canActivate: [RoleGuard] },
+      { path: 'new', component: RecipeEditComponent, canActivate: [RoleGuard], canDeactivate: [CanDeactivateGuard] },
       {
         path: ':id',
         component: RecipeDetailComponent,
@@ -27,6 +28,7 @@ const routes: Routes = [
         path: ':id/edit',
         component: RecipeEditComponent,
         canActivate: [RoleGuard],
+        canDeactivate: [CanDeactivateGuard],
         resolve: [RecipesResolverService],
       },
     ],

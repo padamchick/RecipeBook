@@ -1,29 +1,36 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { FormGroup, FormControl, FormArray, Validators, NgForm } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import { RecipeService } from '../recipe.service';
 import { Recipe } from '../recipe.model';
 import { Ingredient } from 'src/app/shared/ingredient.model';
 import { DataStorageService } from 'src/app/shared/data-storage.service';
+import { CanComponentDeactivate } from './can-deactivate.guard';
+import { Observable, Subject, Observer } from 'rxjs';
+// import _ from 'lodash';
+import {
+  ConfirmationDialogModel,
+  ConfirmationDialogComponent,
+} from 'src/app/shared/confirmation-dialog/confirmation-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmationDialogModel, ConfirmationDialogComponent } from 'src/app/shared/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-recipe-edit',
   templateUrl: './recipe-edit.component.html',
   styleUrls: ['./recipe-edit.component.css'],
 })
-export class RecipeEditComponent implements OnInit {
+export class RecipeEditComponent implements OnInit, CanComponentDeactivate {
   id: number;
   editMode = false;
-  recipe: Recipe = new Recipe('','','',[]);
-
+  changesSaved = false;
+  recipe: Recipe = new Recipe('', '', '', []);
 
   constructor(
     private route: ActivatedRoute,
-    private recipeService: RecipeService,
+    public recipeService: RecipeService,
     private router: Router,
-    private dataService: DataStorageService
+    private dataService: DataStorageService,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -36,96 +43,102 @@ export class RecipeEditComponent implements OnInit {
   }
 
   private initForm() {
-    // let recipeName = '';
-    // let recipeImagePath = '';
-    // let recipeDescription = '';
-    // let recipeIngredients = [];
-
     if (this.editMode) {
-      const recipe = this.recipeService.getRecipe(this.id);
+      // let oldRecipe = this.recipeService.getRecipe(this.id);
+      let recipe = JSON.parse(
+        JSON.stringify(this.recipeService.getRecipe(this.id))
+      );
       this.recipe.name = recipe.name;
       this.recipe.imagePath = recipe.imagePath;
       this.recipe.description = recipe.description;
       this.recipe.ingredients = recipe.ingredients;
-    //   recipeName = recipe.name;
-    //   recipeImagePath = recipe.imagePath;
-    //   recipeDescription = recipe.description;
-    //   if (recipe['ingredients']) {
-    //     for (let ingredient of recipe.ingredients) {
-    //       recipeIngredients.push(
-    //         new FormGroup({
-    //           name: new FormControl(ingredient.name, Validators.required),
-    //           amount: new FormControl(ingredient.amount, [
-    //             Validators.required,
-    //             Validators.pattern(/^(\d*\.)?\d+$/)
-    //           ]),
-    //           unit: new FormControl(ingredient.unit)
-    //         })
-    //       );
-    //     }
-    //   }
     }
-
-    // this.recipeForm = new FormGroup({
-    //   name: new FormControl(recipeName, Validators.required),
-    //   imagePath: new FormControl(recipeImagePath, Validators.required),
-    //   description: new FormControl(recipeDescription, Validators.required),
-    //   ingredients: recipeIngredients,
-    // });
   }
 
-
   onSubmit(form: NgForm) {
-    if(this.editMode) {
+    if (this.editMode) {
       this.recipeService.updateRecipe(this.id, this.recipe);
-      this.editMode=false;
-      this.router.navigate(['../'], {relativeTo: this.route, queryParamsHandling: 'preserve'})
+      this.editMode = false;
+      this.changesSaved = true;
+      this.router.navigate(['../'], {
+        relativeTo: this.route,
+        queryParamsHandling: 'preserve',
+      });
     } else {
       this.recipeService.addRecipe(this.recipe);
       let newIndex = this.recipeService.getIndexOfLastRecipe();
-      this.editMode=false;
-      this.router.navigate(['../', newIndex], {relativeTo: this.route, queryParamsHandling: 'preserve'})
+      this.editMode = false;
+      this.changesSaved = true;
+      this.router.navigate(['../', newIndex], {
+        relativeTo: this.route,
+        queryParamsHandling: 'preserve',
+      });
     }
-
     this.dataService.storeRecipes();
-
-    // let name = this.recipeForm.get('name').value;
-    // let imagePath = this.recipeForm.get('imagePath').value;
-    // let description = this.recipeForm.get('description').value;
-    // let ingredients = this.recipeForm.get('ingredients').value;
-    // const newRecipe = new Recipe(name, description, imagePath,  ingredients);
-    // if(this.editMode) {
-    //   this.recipeService.updateRecipe(this.id, this.recipeForm.value);
-    //   this.editMode=false;
-    //   this.router.navigate(['../'], {relativeTo: this.route, queryParamsHandling: 'preserve'})
-    // } else {
-    //   this.recipeService.addRecipe(this.recipeForm.value);
-    //   let newIndex = this.recipeService.getIndexOfLastRecipe();
-    //   this.editMode=false;
-    //   this.router.navigate(['../', newIndex], {relativeTo: this.route, queryParamsHandling: 'preserve'})
-    // }
-
   }
 
   onAddIngredient() {
-    this.recipe.ingredients.push(new Ingredient('',null,''));
-  //   (<FormArray>this.recipeForm.get('ingredients')).push(
-  //     new FormGroup({
-  //       'name': new FormControl(null, Validators.required),
-  //       'amount': new FormControl(null, [Validators.required, Validators.pattern(/^(\d*\.)?\d+$/)]),
-  //       'unit': new FormControl(null)
-  //     })
-  //   )
+    this.recipe.ingredients.push(new Ingredient('', null, ''));
   }
 
   onDelete(index: number) {
     this.recipe.ingredients.splice(index, 1);
-  //   (<FormArray>this.recipeForm.get('ingredients')).removeAt(index);
+    //   (<FormArray>this.recipeForm.get('ingredients')).removeAt(index);
   }
 
   onCancel() {
-
-    this.router.navigate(['../'], {relativeTo: this.route});
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 
+  // canDeactivate(): boolean | Promise<boolean> | Observable<boolean> {
+  //   return true;
+  // }
+
+  canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
+    const recipe = this.recipeService.getRecipe(this.id);
+
+    const subject = new Subject<boolean>();
+
+    if (!recipe) {
+      return true;
+    }
+    console.log(
+      JSON.stringify(recipe.ingredients) ===
+        JSON.stringify(this.recipe.ingredients)
+    );
+    if (
+      this.recipe.description === recipe.description &&
+      this.recipe.imagePath === recipe.imagePath &&
+      this.recipe.name === recipe.name &&
+      JSON.stringify(recipe.ingredients) ===
+        JSON.stringify(this.recipe.ingredients)
+    ) {
+      return true;
+    } else {
+      // jesli nastapila zmiana w formularzu:
+      return Observable.create((observer: Observer<boolean>) => {
+        const message = 'Are you sure you want to discard all changes?';
+        const dialogData = new ConfirmationDialogModel(
+          'Confirm Exit',
+          message,
+          'Discard'
+        );
+        const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+          maxWidth: '400px',
+          data: dialogData,
+        });
+
+        dialogRef.afterClosed().subscribe(
+          (result: boolean) => {
+            observer.next(result);
+            observer.complete();
+          },
+          (error) => {
+            observer.next(false);
+            observer.complete();
+          }
+        );
+      });
+    }
+  }
 }

@@ -9,11 +9,13 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class ConfirmationDialogComponent implements OnInit {
   title: string;
   message: string;
+  confirmButton: string;
 
   constructor(public dialogRef: MatDialogRef<ConfirmationDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: ConfirmationDialogModel) {
       this.title = data.title;
       this.message = data.message;
+      this.confirmButton = data.confirmButton;
      }
 
   ngOnInit(): void {
@@ -30,5 +32,5 @@ export class ConfirmationDialogComponent implements OnInit {
 }
 
 export class ConfirmationDialogModel {
-  constructor(public title: string, public message: string){}
+  constructor(public title: string, public message: string, public confirmButton: string){}
 }

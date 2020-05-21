@@ -44,11 +44,13 @@ export class RecipeDetailComponent implements OnInit {
     });
 
     // sprawdzenie czy wlaczony tryb admina
-    this.authService.user.subscribe((user) => {
-      user.email === 'guest@gmail.com'
-        ? (this.isAdminMode = false)
-        : (this.isAdminMode = true);
-    });
+    this.authService.user
+      .pipe(filter((user) => !!user && !!user.email))
+      .subscribe((user) => {
+        user.email === 'guest@gmail.com'
+          ? (this.isAdminMode = false)
+          : (this.isAdminMode = true);
+      });
   }
 
   onAddToShoppingList() {
@@ -62,7 +64,7 @@ export class RecipeDetailComponent implements OnInit {
   onDeleteRecipe() {
     const message = 'Are you sure you want to delete this recipe?';
 
-    const dialogData = new ConfirmationDialogModel('Confirm Delete', message);
+    const dialogData = new ConfirmationDialogModel('Confirm Delete', message, 'Delete');
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       maxWidth: '400px',
       data: dialogData,

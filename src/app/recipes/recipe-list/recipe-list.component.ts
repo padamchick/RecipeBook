@@ -4,6 +4,7 @@ import { RecipeService } from '../recipe.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-recipe-list',
@@ -29,7 +30,9 @@ export class RecipeListComponent implements OnInit, OnDestroy {
       }
     )
 // sprawdzenie czy wlaczony tryb admina
-    this.authService.user.subscribe(user => {
+    this.authService.user.pipe(
+      filter(user => !!user && !!user.email)
+    ).subscribe(user => {
       user.email === 'guest@gmail.com'
           ? (this.isAdminMode = false)
           : (this.isAdminMode = true);

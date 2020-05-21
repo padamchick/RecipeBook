@@ -37,7 +37,7 @@
           Ingredients
         </div>
 
-        <div class="card">
+        <div *ngIf="recipe.ingredients" class="card">
           <div fxLayout="column">
             <div *ngFor="let ingredient of recipe.ingredients; let i = index" fxLayout="row" fxLayoutGap="1%"
               class="example-form">
@@ -66,77 +66,6 @@
       </div>
       <button mat-raised-button class="mat-success" type="submit">Save</button>
       <button mat-raised-button class="mat-warn" type="button" (click)="onCancel()">Cancel</button>
-
-
-      <!-- <div class="row">
-        <div class="col-xs-12">
-
-          <div class="row">
-            <div class="col-xs-10">
-              <button type="button" class="btn btn-success btn-xs" (click)="onAddIngredient()">+</button>
-              <label style="font-size: medium;">Ingredients</label>
-            </div>
-          </div>
-          <div style="padding: 10px">
-            <div class="row">
-              <div class="col-xs-6">
-                <label>Name</label>
-              </div>
-              <div class="col-xs-2">
-                <label>Amount</label>
-              </div>
-              <div class="col-xs-2">
-                <label>Unit</label>
-              </div>
-            </div>
-
-
-
-
-
-
-
-
-            <mat-card>
-              <mat-card-title>Ingredients</mat-card-title>
-              <mat-card-content>
-                <div class="row" *ngFor="let ingredient of ingredients; let i=index">
-                  <div id="name" class="col-xs-10 col-md-6">
-                    <mat-form-field fxLayout>
-                      <input matInput type="text">
-                      <input matInput type="number" step="0.1">
-                      <input matInput type="text">
-                    </mat-form-field>
-                  </div>
-                  <div id="amount" class="col-xs-5 col-md-2">
-                    <mat-form-field>
-
-                    </mat-form-field>
-                  </div>
-                  <div id="unit" class="col-xs-5 col-md-2">
-                    <mat-form-field>
-
-                    </mat-form-field>
-                  </div>
-                  <div class="col-xs-2 col-md-2">
-                    <button type="button" class="btn btn-danger">X</button>
-                  </div>
-                </div>
-              </mat-card-content>
-
-            </mat-card>
-
-          </div>
-
-          <div class="row" style="margin-top: 5px;">
-            <div class="col-xs-12">
-              <button type="submit" class="btn btn-success" [disabled]="f.invalid">Save</button>
-              <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
-            </div>
-          </div>
-          <br><br>
-        </div>
-      </div> -->
 
     </form>
   </div>

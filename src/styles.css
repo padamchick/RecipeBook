@@ -17,6 +17,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
   --text-primary: white;
   --text-accent: white;
   --green: rgb(25, 192, 53);
+  --yellow: #FFA902;
   --group-b: #FFB5A8;
   --group-c: #8FF2FF;
   --group-d: #FFD375;
@@ -80,6 +81,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
 
 .mat-success-icon {
   color: var(--green) !important;
+}
+
+.mat-yellow {
+  background: var(--yellow) !important;
+  color: black !important;
 }
 
 /* kolory dla checkboxów */
