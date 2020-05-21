@@ -1,7 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/dist/css/bootstrap.css";
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 :root {
   --th-primary-dark: #000000;
@@ -10,6 +11,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   --th-accent-dark: rgb(5, 64, 119);
   --th-accent: #4499E9;
   --th-accent-light: rgb(114, 184, 250);
+  --th-fancy: #892828;
   --th-disabled: #20222380;
   --th-background: linear-gradient(to bottom, #FFFFFF 192px, #ECE9E6) fixed;
   --text-primary: white;
@@ -19,6 +21,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   --group-c: #8FF2FF;
   --group-d: #FFD375;
   --group-e: #82FFC8;
+}
+
+.theme-fancy {
+  background: var(--th-fancy) !important;
+  color: var(--text-primary) !important;
 }
 
 .color-bg {
@@ -75,4 +82,17 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   color: var(--green) !important;
 }
 
+/* kolory dla checkboxów */
+
+.unique-selection-list .dark-blue-checkbox .mat-pseudo-checkbox-checked {
+  background: rgb(5, 64, 119) !important;
+}
+
+.unique-selection-list .fuchsia-checkbox .mat-pseudo-checkbox-checked {
+  background: #F0F !important;
+}
+
+.unique-selection-list .green-checkbox .mat-pseudo-checkbox-checked {
+  background: #0F0 !important;
+}
 

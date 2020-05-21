@@ -1,4 +1,4 @@
-  <div class="col-xs-12" fxFlexOrder.lt-sm="2">
+  <div class="col-xs-12" *ngIf="isAdminMode">
     <button mat-raised-button class="mat-success" (click)="onNewRecipe()">New Recipe</button>
   </div>
     <mat-divider style="margin: 10px"></mat-divider>

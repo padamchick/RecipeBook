@@ -5,11 +5,11 @@ import { NgForm } from '@angular/forms';
 import { AuthService } from '../auth.service';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  selector: 'app-guest',
+  templateUrl: './guest.component.html',
+  styleUrls: ['./guest.component.css']
 })
-export class RegisterComponent{
+export class GuestComponent{
 
   isLoading = false;
   // isLoginMode = true;
@@ -29,26 +29,20 @@ export class RegisterComponent{
       this.authService.isLoading.next(false);
       return;
     }
-    const email = form.value.email;
-    const password = form.value.password;
+    const email = 'guest@gmail.com';
+    const password = '1234As';
 
-
-    this.authService.signup(email, password).subscribe(
+    this.authService.login(email, password).subscribe(
       (responsedata) => {
-        // console.log(responsedata);
-        console.log('Handle success');
-        this.isLoading=false;
-        this.authService.isLoading.next(false);
-        console.log('Handle success 2');
-
-        this.router.navigate(['./recipes'])
+        console.log(responsedata);
+      this.authService.isLoading.next(false);
+      this.router.navigate(['./recipes'])
       },
       errorMessage => {
         // console.log(errorMessage);
         console.log('Handle error');
-        this.isLoading=false;
-        this.authService.isLoading.next(false);
         this.error = errorMessage;
+        this.authService.isLoading.next(false);
       }
     );
 

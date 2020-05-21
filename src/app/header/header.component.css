@@ -4,7 +4,7 @@
 }
 
 .sidenav {
-  width: 200px;
+  width: 80%
 }
 
 .mat-toolbar {
@@ -80,3 +80,8 @@ button.active:focus {
   font-weight: bold;
   margin-right: 15px;
 }
+
+img {
+  max-height: 30px;
+}
+

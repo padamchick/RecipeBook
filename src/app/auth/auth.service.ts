@@ -6,6 +6,8 @@ import { User } from "./user.model";
 import { Router } from "@angular/router";
 import { environment } from 'src/environments/environment';
 
+
+
 export interface AuthResponseData {
   idToken: string;
   email: string;

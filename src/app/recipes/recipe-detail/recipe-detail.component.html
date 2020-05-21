@@ -7,7 +7,7 @@
 <div style="margin-bottom: 20px;">
   <div class="col-xs-12">
 
-    <div class="dropdown">
+    <div class="dropdown" *ngIf="isAdminMode">
       <button mat-raised-button  class="dropdown-toggle theme-accent-dark" data-toggle="dropdown" aria-haspopup="true"
         aria-expanded="false">Manage Recipe <span class="caret"></span></button>
       <div class="dropdown-menu">
@@ -41,7 +41,7 @@
       </mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource">
 
 
         <!-- Name Column -->

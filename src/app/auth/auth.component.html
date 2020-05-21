@@ -5,7 +5,7 @@
       <div class="row">
         <div fxFlex fxLayout="column" fxLayoutAlign="center center">
           <img src="https://i.imgur.com/e8KLaym.png" alt="recipe-book" class="img-fluid">
-          <p class="display-4">{{ loginMode ? 'Login' : 'Sign Up' }}</p>
+          <p class="display-4">{{ loginMode ? 'Login' : 'Login' }}</p>
         </div>
       </div>
       <div class="mat-tap-fix">
@@ -13,8 +13,8 @@
           <mat-tab label="Log In">
             <app-login></app-login>
           </mat-tab>
-          <mat-tab label="Sign Up">
-            <app-register></app-register>
+          <mat-tab label="Guest">
+            <app-guest></app-guest>
           </mat-tab>
         </mat-tab-group>
       </div>

@@ -5,6 +5,8 @@ import { RecipeService } from '../recipe.service';
 import { Recipe } from '../recipe.model';
 import { Ingredient } from 'src/app/shared/ingredient.model';
 import { DataStorageService } from 'src/app/shared/data-storage.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationDialogModel, ConfirmationDialogComponent } from 'src/app/shared/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-recipe-edit',
@@ -122,6 +124,7 @@ export class RecipeEditComponent implements OnInit {
   }
 
   onCancel() {
+
     this.router.navigate(['../'], {relativeTo: this.route});
   }
 

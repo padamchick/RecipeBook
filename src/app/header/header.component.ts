@@ -5,6 +5,7 @@ import { AuthService } from '../auth/auth.service';
 import { Subscription, Observable } from 'rxjs';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { map, shareReplay } from 'rxjs/operators';
+import { RecipeService } from '../recipes/recipe.service';
 
 @Component({
   selector: 'app-header',
@@ -14,6 +15,7 @@ import { map, shareReplay } from 'rxjs/operators';
 export class HeaderComponent implements OnInit, OnDestroy {
   private userSub: Subscription;
   isAuthenticated = false;
+  isAdminMode = false;
 
   routes = [
     { name: 'Authentication', route: '/auth', needAuthentication: false },
@@ -34,13 +36,24 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(
     private dataStorageService: DataStorageService,
     private authService: AuthService,
-    private breakpointObserver: BreakpointObserver
+    private breakpointObserver: BreakpointObserver,
+    public recipeService: RecipeService
   ) {}
 
   ngOnInit() {
     this.userSub = this.authService.user.subscribe((user) => {
-      this.isAuthenticated = !user ? false : true;
+      if(user) {
+        this.isAuthenticated = true;
+        if(user.email==='guest@gmail.com') {
+          this.isAdminMode = false;
+        } else {
+          this.isAdminMode = true;
+        }
+      } else {
+        this.isAuthenticated = false;
+      }
     });
+
   }
 
   onFetchData() {

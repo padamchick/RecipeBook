@@ -1,27 +1,30 @@
-button:focus, button:active:focus, button.active:focus {
+button:focus,
+button:active:focus,
+button.active:focus {
   outline: none !important;
   outline-style: none !important;
-  }
+}
 
-  table {
-    width: 100%;
-  }
+table {
+  width: 100%;
+}
 
-  .mat-form-field {
-    font-size: 14px;
-    width: 100%;
-  }
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
 
-  mat-icon {
-    margin-right: 7px;
-  }
+mat-icon {
+  margin-right: 7px;
+}
 
-  img {
-    margin-top: 15px;
-    margin-bottom: 15px;
-  }
+img {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
 
-  .dropdown-item.active, .dropdown-item:active {
-    color: #fff;
-    background-color: rgb(5, 64, 119);
-  }
+.dropdown-item.active,
+.dropdown-item:active {
+  color: #fff;
+  background-color: rgb(5, 64, 119);
+}

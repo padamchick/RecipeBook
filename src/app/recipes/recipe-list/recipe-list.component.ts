@@ -1,8 +1,9 @@
-import { Component, OnInit, EventEmitter, Output, OnDestroy } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, OnDestroy, Input } from '@angular/core';
 import { Recipe } from '../recipe.model';
 import { RecipeService } from '../recipe.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-recipe-list',
@@ -13,10 +14,12 @@ export class RecipeListComponent implements OnInit, OnDestroy {
 
   recipes: Recipe[];
   recipeChangeSubscription: Subscription;
+  isAdminMode: boolean;
 
   constructor(private recipeService: RecipeService,
               private router: Router,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private authService: AuthService) { }
 
   ngOnInit(): void {
     this.recipes = this.recipeService.getRecipes();
@@ -25,6 +28,12 @@ export class RecipeListComponent implements OnInit, OnDestroy {
         this.recipes = recipes;
       }
     )
+// sprawdzenie czy wlaczony tryb admina
+    this.authService.user.subscribe(user => {
+      user.email === 'guest@gmail.com'
+          ? (this.isAdminMode = false)
+          : (this.isAdminMode = true);
+    })
 
   }
 

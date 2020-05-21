@@ -6,13 +6,15 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../material/material/material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { LayoutModule } from '@angular/cdk/layout';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 
 
 @NgModule({
   declarations: [
     AlertComponent,
     LoadingSpinnerComponent,
-    DropdownDirective
+    DropdownDirective,
+    ConfirmationDialogComponent
   ],
   imports: [
     CommonModule,

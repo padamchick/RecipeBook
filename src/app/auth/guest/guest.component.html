@@ -1,6 +1,6 @@
 <form #f="ngForm" (ngSubmit)="onSubmit(f)" *ngIf="!isLoading">
 
-  <div class="form-group">
+  <!-- <div class="form-group">
     <label for="email">Email</label>
     <div class="input-group">
       <div class="input-group-prepend">
@@ -18,10 +18,11 @@
       </div>
       <input type="password" id="password" class="form-control" ngModel name="password" required>
     </div>
-  </div>
+  </div> -->
 
+  <br>
   <div>
-    <button mat-raised-button class="theme-accent-dark" type="submit" [disabled]=!f.valid>Sign Up</button>
+    <button mat-raised-button class="theme-accent-dark" type="submit" [disabled]=!f.valid>Login as a Guest</button>
   </div>
 
 </form>

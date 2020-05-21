@@ -5,7 +5,21 @@
     <mat-nav-list role="navigation">
       <a mat-list-item *ngIf="!isAuthenticated" routerLinkActive="active" routerLink="/auth" (click)="drawer.toggle()">Login</a>
       <a mat-list-item *ngIf="isAuthenticated" routerLinkActive="active" routerLink="/recipes" (click)="drawer.toggle()">Recipes</a>
-      <a mat-list-item *ngIf="isAuthenticated" routerLinkActive="active"
+
+      <!-- <div class="dropdown">
+        <a mat-list-item data-toggle="dropdown">Manage Recipe</a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" *ngFor="let recipe of this.recipeService.getRecipes()">
+            <mat-card-header>
+              <div mat-card-avatar class="example-header-image"><img src='{{recipe.imagePath}}'></div>
+              <mat-card-title>{{recipe.name}}</mat-card-title>
+            </mat-card-header>
+          </a>
+        </div>
+      </div> -->
+
+
+      <a mat-list-item *ngIf="isAuthenticated && isAdminMode" routerLinkActive="active"
         routerLink="/shopping-list" (click)="drawer.toggle()">Shopping List</a>
       <a mat-list-item *ngIf="isAuthenticated" (click)="onLogout(); drawer.toggle()">Logout</a>
     </mat-nav-list>
@@ -28,8 +42,10 @@
             <span class="label">Recipes</span>
           <!-- </div> -->
           </a>
+
+
 <!--          zakładka Shopping List -->
-          <a mat-button *ngIf="isAuthenticated" routerLinkActive="active" routerLink="/shopping-list">
+          <a mat-button *ngIf="isAuthenticated && isAdminMode" routerLinkActive="active" routerLink="/shopping-list">
             <mat-icon class="icon">shopping_cart</mat-icon>
             <span class="label">Shopping List</span>
           </a>

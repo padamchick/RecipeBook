@@ -11,6 +11,8 @@ import {MatTableModule} from '@angular/material/table';
 import {MatInputModule} from '@angular/material/input';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatSelectModule} from '@angular/material/select';
+import {MatDialogModule} from '@angular/material/dialog';
 
 const materialComponents = [
   MatCardModule,
@@ -24,7 +26,9 @@ const materialComponents = [
   MatTableModule,
   MatInputModule,
   MatExpansionModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  MatSelectModule,
+  MatDialogModule
 ]
 
 @NgModule({
