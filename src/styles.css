@@ -18,19 +18,19 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
   --text-accent: white;
   --green: rgb(25, 192, 53);
   --yellow: #FFA902;
-  --group-b: #FFB5A8;
+  --red: rgb(255, 0, 0);
   --group-c: #8FF2FF;
   --group-d: #FFD375;
   --group-e: #82FFC8;
 }
 
-.theme-fancy {
-  background: var(--th-fancy) !important;
+.color-bg {
+  background: var(--background) !important;
   color: var(--text-primary) !important;
 }
 
-.color-bg {
-  background: var(--background) !important;
+.theme-fancy {
+  background: var(--th-fancy) !important;
   color: var(--text-primary) !important;
 }
 
@@ -74,21 +74,32 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
   color: black !important
 }
 
-.mat-success {
+.mat-green {
   background: var(--green) !important;
   color: var(--text-accent) !important;
 }
 
-.mat-success-icon {
+.mat-green-icon {
   color: var(--green) !important;
+}
+
+.mat-red {
+  background: var(--red) !important;
+  color: white !important;
+}
+
+.mat-red-icon {
+  color: var(--red) !important;
+
 }
 
 .mat-yellow {
   background: var(--yellow) !important;
-  color: black !important;
+  color: white !important;
 }
 
 /* kolory dla checkboxów */
+
 
 .unique-selection-list .dark-blue-checkbox .mat-pseudo-checkbox-checked {
   background: rgb(5, 64, 119) !important;
@@ -102,3 +113,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
   background: #0F0 !important;
 }
 
+
+.mat-checkbox-checked.mat-accent .mat-checkbox-ripple .mat-ripple-element {
+  opacity: 0.03 !important;
+  background: rgb(5, 64, 119)!important;
+}
+
+.mat-checkbox-checked.mat-accent .mat-checkbox-background,.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+  background-color: rgb(5, 64, 119);
+}

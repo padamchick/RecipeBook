@@ -1,20 +1,93 @@
-<div class="row">
-  <div class="col-xs-12">
-    <mat-selection-list #list>
+<div class="col-xs-12 col-xl-10 offset-xl-1">
+    <table mat-table [dataSource]="dataSource" matSort>
+      <!-- Checkbox Column -->
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef matSort>
+          <mat-checkbox (change)="$event ? masterToggle() : null;" [checked]="selection.hasValue() && isAllSelected()"
+            [indeterminate]="selection.hasValue() && !isAllSelected()" class="dark-blue-checkbox">
+          </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let row; let i=index" matSort>
+          <mat-checkbox [(ngModel)]="row.isSelected"
+            (click)="$event.stopPropagation()"
+            (change)="$event ? selection.toggle(row) : null;"
+            [checked]="selection.isSelected(row)">
+          </mat-checkbox>
+        </td>
+      </ng-container>
+
+
+      <!-- Position Column -->
+      <!--
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef> No. </th>
+        <td mat-cell *matCellDef="let element; let i = index"> {{i+1}} </td>
+      </ng-container> -->
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.name.toUpperCase()}} </td>
+      </ng-container>
+
+      <!-- Amount Column -->
+      <ng-container matColumnDef="amount">
+        <th mat-header-cell *matHeaderCellDef> Amount </th>
+        <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
+      </ng-container>
+
+      <!-- Unit Column -->
+      <ng-container matColumnDef="unit">
+        <th mat-header-cell *matHeaderCellDef> Unit </th>
+        <td mat-cell *matCellDef="let element"> {{element.unit}} </td>
+      </ng-container>
+
+      <!-- Action Column -->
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef> Action </th>
+        <td mat-cell *matCellDef="let element; let i=index" (click)="$event.stopPropagation()">
+          <button mat-icon-button (click)="onLog('edit' + i)" style="z-index: 10;">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button (click)="onLog('delete' + i)" style="z-index: 10;">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; let i=index; columns: displayedColumns;"
+        [ngClass]="{hovered: row.hovered && !selection.isSelected(row), highlighted: selection.isSelected(row)}"
+        (mouseover)="row.hovered = true" (mouseout)="row.hovered = false"
+        (click)="selection.toggle(row); onToggle(i, selection.isSelected(row))"></tr>
+    </table>
+    <button mat-raised-button class="mat-yellow" (click)="onSave()">Save</button>
+
+    <br>
+    ----
+    <div *ngFor="let ingredient of ingredients">
+      {{ingredient.name}}: {{ingredient.isSelected}}
+    </div>
+    <br>----
+  </div>
+<!-- <mat-selection-list #list [(ngModel)]="selectedOptions" (ngModelChange)="onNgModelChange($event)">
       <mat-divider></mat-divider>
       <div class="unique-selection-list">
         <mat-list-option class="dark-blue-checkbox" checkboxPosition="before"
-          *ngFor="let ingredient of ingredients; let i = index" (click)="onEditItem(i)">
+          *ngFor="let ingredient of ingredients; let i = index" [value]="i" (click)="onEditItem(i)">
           {{ ingredient.name }} ({{ ingredient.amount }} {{ingredient.unit}})
-          <mat-icon matListIcon><i class="fas fa-apple-alt"></i></mat-icon>
+          <mat-icon class="mat-red-icon" matListIcon><i class="fas fa-apple-alt"></i></mat-icon>
           <mat-divider></mat-divider>
         </mat-list-option>
       </div>
-
     </mat-selection-list>
+
+    <br>
+    {{selectedOptions}}
+
     <br><br><br><br>
-    <app-shopping-edit></app-shopping-edit>
-    <!-- <hr>
+    <app-shopping-edit></app-shopping-edit> -->
+<!-- <hr>
     <ul class="list-group">
       <a class="list-group-item"
       style="cursor: pointer"
@@ -25,5 +98,5 @@
     </a>
     </ul> -->
 
-  </div>
-</div>
+<!-- </div>
+</div> -->

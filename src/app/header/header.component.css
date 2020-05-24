@@ -4,7 +4,7 @@
 }
 
 .sidenav {
-  width: 80%
+  width: 40%;
 }
 
 .mat-toolbar {
@@ -17,13 +17,37 @@
   display: none;
 }
 
-mat-toolbar a.mat-button {
-  color: rgb(223, 223, 223);
+a:hover {
+  color: white;
+  text-decoration: none;
+  background-color: rgb(5, 64, 119);
 }
 
-mat-toolbar a:hover,
-a:active {
+.logout {
+  color: white;
+}
+
+mat-nav-list a.mat-list-item.active {
+  background-color: rgb(233, 233, 233);
+}
+mat-nav-list a.mat-list-item:focus,
+a.mat-list-item:active  {
+  background-color: rgb(255, 255, 255);
+}
+
+mat-toolbar a.mat-button {
+  cursor: pointer;
+  color: rgb(207, 207, 207);
+}
+
+mat-toolbar a.mat-button.active {
   color: rgb(255, 255, 255);
+}
+
+mat-toolbar a:hover{
+  color: rgb(255, 255, 255);
+  /* background:  rgb(5, 64, 126); */
+  /* background:  rgb(18, 100, 82); */
 }
 
 mat-nav-list a:hover,
@@ -55,18 +79,12 @@ a:active {
   height: 25px;
 }
 
-a:hover {
-  color: white;
-  text-decoration: none;
-  background-color: rgb(5, 64, 119);
-}
 
 button:focus,
 button:active:focus,
 button.active:focus {
   outline: none !important;
   outline-style: none !important;
-
 }
 
 

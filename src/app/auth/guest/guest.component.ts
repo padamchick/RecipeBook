@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component} from '@angular/core';
 
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
@@ -18,9 +18,6 @@ export class GuestComponent{
   constructor(private authService: AuthService,
     private router: Router) {}
 
-  // onSwitchMode() {
-  //   this.isLoginMode = !this.isLoginMode;
-  // }
 
   onSubmit(form: NgForm) {
     this.authService.isLoading.next(true);

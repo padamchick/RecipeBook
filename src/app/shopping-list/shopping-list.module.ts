@@ -5,13 +5,15 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ShoppingListRoutingModule } from './shopping-list-routing.module';
 import { SharedModule } from '../shared/shared.module';
+import { TableComponent } from './table/table.component';
 
 
 
 @NgModule({
   declarations: [
     ShoppingListComponent,
-    ShoppingEditComponent
+    ShoppingEditComponent,
+    TableComponent
   ],
   imports: [
     RouterModule,

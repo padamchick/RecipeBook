@@ -1,0 +1,25 @@
+table {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.mat-row.highlighted {
+  background: rgb(239, 239, 239);
+}
+
+.mat-row.hovered {
+  background: rgb(247, 247, 247);
+}
+
+.mat-row {
+  cursor: pointer;
+}
+
+button:focus,
+button:active:focus,
+button.active:focus {
+  outline: none !important;
+  outline-style: none !important;
+}
+
+

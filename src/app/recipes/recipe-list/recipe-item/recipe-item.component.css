@@ -7,6 +7,11 @@
   border-color: rgb(5, 64, 119);
 }
 
+/* .list-group-item:active {
+  background-color: #FFA902;
+  border-color: #FFA902;
+} */
+
 img {
   margin-left: 10px;
 }

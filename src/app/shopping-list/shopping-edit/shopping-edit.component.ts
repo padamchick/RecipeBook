@@ -27,7 +27,7 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
         this.form.setValue({
           name: this.editedItem.name,
           amount: this.editedItem.amount,
-          unit: this.editedItem.unit
+          unit: this.editedItem.unit,
         });
       }
     );
@@ -39,27 +39,26 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
     if (!this.editMode) {
       this.shoppingListService.addIngredient(newIngredient);
     } else {
-      this.shoppingListService.updateIngredient(this.editedItemIndex, newIngredient);
+      this.shoppingListService.updateIngredient(
+        this.editedItemIndex,
+        newIngredient
+      );
     }
     this.onClear();
   }
 
   onClear() {
     this.form.reset();
-    this.editMode=false;
-  }
-
-  ngOnDestroy() {
-    this.editSubscription.unsubscribe();
+    this.editMode = false;
   }
 
   onDelete() {
     this.shoppingListService.deleteIngredient(this.editedItemIndex);
     this.form.reset();
-    this.editMode=false;
+    this.editMode = false;
   }
 
-  // logForm() {
-  //   console.log(this.form);
-  // }
+  ngOnDestroy() {
+    this.editSubscription.unsubscribe();
+  }
 }

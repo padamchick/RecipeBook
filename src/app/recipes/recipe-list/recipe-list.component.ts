@@ -23,6 +23,7 @@ export class RecipeListComponent implements OnInit, OnDestroy {
               private authService: AuthService) { }
 
   ngOnInit(): void {
+// zaladuj przepisy i uaktualnij, kiedy dojdzie do zmiany
     this.recipes = this.recipeService.getRecipes();
     this.recipeChangeSubscription = this.recipeService.recipesChanged.subscribe(
       (recipes: Recipe[]) => {

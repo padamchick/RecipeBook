@@ -13,6 +13,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatSelectModule} from '@angular/material/select';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatSortModule} from '@angular/material/sort';
 
 const materialComponents = [
   MatCardModule,
@@ -28,7 +30,9 @@ const materialComponents = [
   MatExpansionModule,
   MatProgressSpinnerModule,
   MatSelectModule,
-  MatDialogModule
+  MatDialogModule,
+  MatCheckboxModule,
+  MatSortModule
 ]
 
 @NgModule({

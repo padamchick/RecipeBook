@@ -3,24 +3,14 @@
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
     <mat-toolbar class="theme-accent-dark">Menu</mat-toolbar>
     <mat-nav-list role="navigation">
+<!--      SIDENAV Login Link -->
       <a mat-list-item *ngIf="!isAuthenticated" routerLinkActive="active" routerLink="/auth" (click)="drawer.toggle()">Login</a>
+<!--      SIDENAV Recipes Link -->
       <a mat-list-item *ngIf="isAuthenticated" routerLinkActive="active" routerLink="/recipes" (click)="drawer.toggle()">Recipes</a>
-
-      <!-- <div class="dropdown">
-        <a mat-list-item data-toggle="dropdown">Manage Recipe</a>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" *ngFor="let recipe of this.recipeService.getRecipes()">
-            <mat-card-header>
-              <div mat-card-avatar class="example-header-image"><img src='{{recipe.imagePath}}'></div>
-              <mat-card-title>{{recipe.name}}</mat-card-title>
-            </mat-card-header>
-          </a>
-        </div>
-      </div> -->
-
-
+<!--      SIDENAV Shopping List Link -->
       <a mat-list-item *ngIf="isAuthenticated && isAdminMode" routerLinkActive="active"
         routerLink="/shopping-list" (click)="drawer.toggle()">Shopping List</a>
+<!--      SIDENAV Logout Link -->
       <a mat-list-item *ngIf="isAuthenticated" (click)="onLogout(); drawer.toggle()">Logout</a>
     </mat-nav-list>
   </mat-sidenav>
@@ -58,7 +48,7 @@
             <span class="label">Login</span>
           </a>
 <!--          zakładka Logout -->
-          <a mat-button style="cursor: pointer;" *ngIf="isAuthenticated" (click)="onLogout()">
+          <a mat-button *ngIf="isAuthenticated" (click)="onLogout()">
             <mat-icon class="icon">input</mat-icon>
             <span class="label">Logout</span>
           </a>

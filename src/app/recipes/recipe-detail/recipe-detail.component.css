@@ -28,3 +28,17 @@ img {
   color: #fff;
   background-color: rgb(5, 64, 119);
 }
+
+.mat-row:nth-child(even){
+  background-color:rgb(247, 247, 247);
+  }
+/*
+  .mat-header-cell {
+    background-color:rgb(161, 161, 161);
+    color: white;
+    font-weight: bold;;
+  } */
+
+/* .mat-row:nth-child(odd){
+  background-color:black;
+  } */
