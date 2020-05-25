@@ -6,6 +6,10 @@ import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatSort, MatSortable } from '@angular/material/sort';
 import { DataStorageService } from '../shared/data-storage.service';
+import { IngredientEditModel, IngredientEditComponent } from '../shared/ingredient-edit/ingredient-edit.component';
+import { MatDialog } from '@angular/material/dialog';
+import { filter } from 'rxjs/operators';
+import { ConfirmationDialogComponent, ConfirmationDialogModel } from '../shared/confirmation-dialog/confirmation-dialog.component';
 
 // export class ShoppingIngredient extends Ingredient {
 //   constructor(ingredient: Ingredient, private selected = false){
@@ -31,11 +35,14 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
   dataSource: MatTableDataSource<Ingredient>;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  constructor(private shoppingListService: ShoppingListService,
-    private dataService: DataStorageService) {}
+  constructor(
+    public shoppingListService: ShoppingListService,
+    private dataService: DataStorageService,
+    public dialog: MatDialog) {}
 
   ngOnInit(): void {
-    this.ingredients = this.shoppingListService.getIngredients();
+    // this.ingredients = this.shoppingListService.getIngredients() ;
+    this.ingredients = JSON.parse(JSON.stringify(this.shoppingListService.getIngredients())) ;
 
     // uzupelnij selected = false dla skladnikow bez ustawionego parametru
     this.ingredients.filter(ingredient => !ingredient.isSelected)
@@ -48,7 +55,9 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
     // uaktualniaj po kazdej zmianie w skladnikach
     this.ingredientsChangeSub = this.shoppingListService.ingredientsChanged.subscribe(
       (ingredients: Ingredient[]) => {
-        this.ingredients = ingredients;
+        // this.ingredients = ingredients;
+        this.ingredients = JSON.parse(JSON.stringify(ingredients));
+        this.dataSource = new MatTableDataSource(this.ingredients);
       }
     );
     this.onSort()
@@ -57,8 +66,8 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
 
   onSort() {
     this.dataSource = new MatTableDataSource(this.ingredients);
-    this.sort.sort(({ id: 'select', start: 'asc'}) as MatSortable);
-    this.dataSource.sort = this.sort;
+    // this.sort.sort(({ id: 'select', start: 'asc'}) as MatSortable);
+    // this.dataSource.sort = this.sort;
 
     // zmiana sortowania dotyczy tylko tego, o którym mowa w sortingDataAccessor
     // this.dataSource.sortingDataAccessor = (ingredient, sortHeaderId) => {
@@ -77,11 +86,6 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
     return numSelected == numRows;
   }
 
-  logSelected() {
-    console.log(this.selection.selected.length)
-
-  }
-
   // zaznacz/odznacz wszystkie wiersze
   masterToggle() {
     if(this.isAllSelected()) {
@@ -93,12 +97,6 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
     }
 
   }
-  // // zaznacz/odznacz wszystkie wiersze
-  // masterToggle() {
-  //   this.isAllSelected()
-  //     ? this.selection.clear()
-  //     : this.dataSource.data.forEach((row) => this.selection.select(row));
-  // }
 
   onToggle(index, status) {
     this.ingredients[index].isSelected = status;
@@ -111,6 +109,45 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
 
   onLog(message) {
     console.log(message);
+  }
+
+  onEdit(el: Ingredient, i: number) {
+    const title = 'Edit Ingredient';
+
+    const dialogData = new IngredientEditModel(title, el.name, el.amount, el.unit);
+    const dialogRef = this.dialog.open(IngredientEditComponent, {
+      maxWidth: '400px',
+      data: dialogData
+    });
+
+    dialogRef.afterClosed().pipe(filter((result: Ingredient) => !!result)).subscribe(
+      result => {
+        el.name = result.name;
+        el.amount = result.amount;
+        el.unit = result.unit;
+        // this.shoppingListService.updateIngredient(i, el);
+        // this.dataService.storeIngredients();
+      }
+    );
+  }
+
+  onDelete(el: Ingredient, i: number) {
+    const title = 'Delete '+el.name.toLowerCase();
+    const message = 'Are you sure to delete '+el.name.toLowerCase()+'?';
+    const confirmButton = 'Delete';
+
+    const dialogData = new ConfirmationDialogModel(title, message, confirmButton);
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      maxWidth: '400px',
+      data: dialogData
+    })
+
+    dialogRef.afterClosed()
+    .pipe(filter(result=>result))
+    .subscribe(result => {
+      this.shoppingListService.deleteIngredient(i);
+      this.dataService.storeIngredients();
+    })
   }
 
   onSave() {

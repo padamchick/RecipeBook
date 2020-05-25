@@ -68,6 +68,13 @@ export class DataStorageService {
         "https://course-recipe-book-30496.firebaseio.com/ingredients.json",
       )
       .pipe(
+        map((ingredients) => {
+          if (!ingredients) {
+            return [];
+          } else {
+            return ingredients
+          }
+        }),
         tap((ingredients) => {
           this.shoppingService.setIngredients(ingredients);
         })

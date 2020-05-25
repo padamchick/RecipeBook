@@ -98,6 +98,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
   color: white !important;
 }
 
+.mat-yellow-icon {
+  color: var(--yellow) !important;
+}
+
 /* kolory dla checkboxów */
 
 
@@ -122,3 +126,4 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
 .mat-checkbox-checked.mat-accent .mat-checkbox-background,.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
   background-color: rgb(5, 64, 119);
 }
+

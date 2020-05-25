@@ -1,5 +1,5 @@
-<div class="col-xs-12 col-xl-10 offset-xl-1">
-    <table mat-table [dataSource]="dataSource" matSort>
+<div class="col-xs-12 col-xl-10 offset-xl-1" >
+    <table *ngIf="ingredients.length > 0" mat-table [dataSource]="dataSource" matSort>
       <!-- Checkbox Column -->
       <ng-container matColumnDef="select">
         <th mat-header-cell *matHeaderCellDef matSort>
@@ -44,12 +44,12 @@
 
       <!-- Action Column -->
       <ng-container matColumnDef="action">
-        <th mat-header-cell *matHeaderCellDef> Action </th>
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
         <td mat-cell *matCellDef="let element; let i=index" (click)="$event.stopPropagation()">
-          <button mat-icon-button (click)="onLog('edit' + i)" style="z-index: 10;">
+          <button mat-icon-button (click)="onEdit(element, i)">
             <mat-icon>edit</mat-icon>
           </button>
-          <button mat-icon-button (click)="onLog('delete' + i)" style="z-index: 10;">
+          <button mat-icon-button class="mat-red-icon" (click)="onDelete(element, i)">
             <mat-icon>delete</mat-icon>
           </button>
         </td>
@@ -63,12 +63,14 @@
     </table>
     <button mat-raised-button class="mat-yellow" (click)="onSave()">Save</button>
 
-    <br>
-    ----
-    <div *ngFor="let ingredient of ingredients">
-      {{ingredient.name}}: {{ingredient.isSelected}}
+
+    <div *ngIf="ingredients.length > 0" style="margin: 15px 0;">
+      -{{shoppingListService.getIngredients()[0].isSelected}}-
+      <div *ngFor="let ingredient of ingredients">
+        {{ingredient.name}}: {{ingredient.isSelected}}
+      </div>
     </div>
-    <br>----
+
   </div>
 <!-- <mat-selection-list #list [(ngModel)]="selectedOptions" (ngModelChange)="onNgModelChange($event)">
       <mat-divider></mat-divider>

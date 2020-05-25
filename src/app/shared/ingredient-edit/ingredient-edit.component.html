@@ -1,0 +1,22 @@
+<div class="container">
+  <h1 mat-dialog-title fxLayoutAlign="center">
+    {{title}}
+  </h1>
+
+  <div mat-dialog-content fxLayout="column" fxLayoutGap="10px">
+    <mat-form-field>
+      <input matInput name="name" [(ngModel)]="name" placeholder="Name">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput name="amount" [(ngModel)]="amount" placeholder="Amount">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput name="unit" [(ngModel)]="unit" placeholder="Unit">
+    </mat-form-field>
+  </div>
+
+  <div mat-dialog-actions>
+    <button mat-raised-button class="mat-green" (click)="onSave()">Save</button>
+    <button mat-raised-button (click)="onCancel()">Cancel</button>
+  </div>
+</div>
