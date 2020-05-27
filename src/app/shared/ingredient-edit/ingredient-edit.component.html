@@ -8,7 +8,7 @@
       <input matInput name="name" [(ngModel)]="name" placeholder="Name">
     </mat-form-field>
     <mat-form-field>
-      <input matInput name="amount" [(ngModel)]="amount" placeholder="Amount">
+      <input matInput type="number" step="0.1" name="amount" [(ngModel)]="amount" placeholder="Amount">
     </mat-form-field>
     <mat-form-field>
       <input matInput name="unit" [(ngModel)]="unit" placeholder="Unit">
@@ -16,7 +16,7 @@
   </div>
 
   <div mat-dialog-actions>
-    <button mat-raised-button class="mat-green" (click)="onSave()">Save</button>
+    <button mat-raised-button class="theme-accent-dark" (click)="onSave()">Save</button>
     <button mat-raised-button (click)="onCancel()">Cancel</button>
   </div>
 </div>

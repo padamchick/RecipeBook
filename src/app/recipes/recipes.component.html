@@ -1,8 +1,8 @@
 <div class="row">
-  <div class="col-md-5 col-xl-5">
+  <div class="col-md-5 col-xl-5" fxFlexOrder.lt-md="2">
     <app-recipe-list></app-recipe-list>
   </div>
-  <div class="col-md-7 col-xl-7">
+  <div class="col-md-7 col-xl-7" [fxFlexOrder.lt-md]="order">
     <router-outlet></router-outlet>
   </div>
 </div>

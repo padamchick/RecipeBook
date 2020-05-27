@@ -4,7 +4,7 @@
 }
 
 .sidenav {
-  width: 40%;
+  width: 65%;
 }
 
 .mat-toolbar {
@@ -20,7 +20,7 @@
 a:hover {
   color: white;
   text-decoration: none;
-  background-color: rgb(5, 64, 119);
+  background-color: var(--th-accent-dark) !important;
 }
 
 .logout {

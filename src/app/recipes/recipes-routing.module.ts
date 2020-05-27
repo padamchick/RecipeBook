@@ -8,7 +8,7 @@ import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { RecipesResolverService } from './recipes-resolver.service';
 import { RoleGuard } from './role.guard';
-import { CanDeactivateGuard } from './recipe-edit/can-deactivate.guard';
+import { CanDeactivateGuard } from '../shared/can-deactivate.guard';
 
 const routes: Routes = [
   {

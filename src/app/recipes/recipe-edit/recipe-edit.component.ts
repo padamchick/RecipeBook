@@ -5,14 +5,16 @@ import { RecipeService } from '../recipe.service';
 import { Recipe } from '../recipe.model';
 import { Ingredient } from 'src/app/shared/ingredient.model';
 import { DataStorageService } from 'src/app/shared/data-storage.service';
-import { CanComponentDeactivate } from './can-deactivate.guard';
+import { CanComponentDeactivate } from '../../shared/can-deactivate.guard';
 import { Observable, Subject, Observer } from 'rxjs';
-// import _ from 'lodash';
 import {
   ConfirmationDialogModel,
   ConfirmationDialogComponent,
 } from 'src/app/shared/confirmation-dialog/confirmation-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table';
+import { IngredientEditModel, IngredientEditComponent } from 'src/app/shared/ingredient-edit/ingredient-edit.component';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-recipe-edit',
@@ -22,8 +24,10 @@ import { MatDialog } from '@angular/material/dialog';
 export class RecipeEditComponent implements OnInit, CanComponentDeactivate {
   id: number;
   editMode = false;
-  changesSaved = false;
+  // changesSaved = false;
   recipe: Recipe = new Recipe('', '', '', []);
+  displayedColumns: string[] = ['name', 'amount', 'unit', 'action'];
+  dataSource: MatTableDataSource<Ingredient>;
 
   constructor(
     private route: ActivatedRoute,
@@ -40,6 +44,8 @@ export class RecipeEditComponent implements OnInit, CanComponentDeactivate {
       this.editMode = params['id'] != null;
       this.initForm();
     });
+
+    this.dataSource = new MatTableDataSource(this.recipe.ingredients);
   }
 
   private initForm() {
@@ -59,7 +65,6 @@ export class RecipeEditComponent implements OnInit, CanComponentDeactivate {
     if (this.editMode) {
       this.recipeService.updateRecipe(this.id, this.recipe);
       this.editMode = false;
-      this.changesSaved = true;
       this.router.navigate(['../'], {
         relativeTo: this.route,
         queryParamsHandling: 'preserve',
@@ -68,7 +73,6 @@ export class RecipeEditComponent implements OnInit, CanComponentDeactivate {
       this.recipeService.addRecipe(this.recipe);
       let newIndex = this.recipeService.getIndexOfLastRecipe();
       this.editMode = false;
-      this.changesSaved = true;
       this.router.navigate(['../', newIndex], {
         relativeTo: this.route,
         queryParamsHandling: 'preserve',
@@ -77,22 +81,65 @@ export class RecipeEditComponent implements OnInit, CanComponentDeactivate {
     this.dataService.storeRecipes();
   }
 
-  onAddIngredient() {
-    this.recipe.ingredients.push(new Ingredient('', null, ''));
+  addIngredient() {
+    const title = 'Add Ingredient';
+    const dialogData = new IngredientEditModel(
+      title,
+      '',
+      null,
+      ''
+    );
+    const dialogRef = this.dialog.open(IngredientEditComponent, {
+      maxWidth: '400px',
+      data: dialogData,
+    });
+    dialogRef
+      .afterClosed()
+      .pipe(filter((result: Ingredient) => !!result))
+      .subscribe((result) => {
+        this.recipe.ingredients.push(result);
+        this.dataSource = new MatTableDataSource(this.recipe.ingredients);
+      });
+  }
+
+  editIngredient(el: Ingredient, i: number) {
+    const title = 'Edit Ingredient';
+
+    const dialogData = new IngredientEditModel(
+      title,
+      el.name,
+      el.amount,
+      el.unit
+    );
+    const dialogRef = this.dialog.open(IngredientEditComponent, {
+      maxWidth: '400px',
+      data: dialogData,
+    });
+
+    dialogRef
+      .afterClosed()
+      .pipe(filter((result: Ingredient) => !!result))
+      .subscribe((result) => {
+        el.name = result.name;
+        el.amount = result.amount;
+        el.unit = result.unit;
+      });
+
   }
 
   onDelete(index: number) {
     this.recipe.ingredients.splice(index, 1);
-    //   (<FormArray>this.recipeForm.get('ingredients')).removeAt(index);
+    this.dataSource = new MatTableDataSource(this.recipe.ingredients)
   }
 
   onCancel() {
     this.router.navigate(['../'], { relativeTo: this.route });
   }
 
-  // canDeactivate(): boolean | Promise<boolean> | Observable<boolean> {
-  //   return true;
-  // }
+  deleteIngredient(el: Ingredient, i: number) {
+    this.recipe.ingredients.splice(i, 1);
+    this.dataSource = new MatTableDataSource(this.recipe.ingredients);
+  }
 
   canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
     const recipe = this.recipeService.getRecipe(this.id);
@@ -102,10 +149,10 @@ export class RecipeEditComponent implements OnInit, CanComponentDeactivate {
     if (!recipe) {
       return true;
     }
-    console.log(
-      JSON.stringify(recipe.ingredients) ===
-        JSON.stringify(this.recipe.ingredients)
-    );
+    // console.log(
+    //   JSON.stringify(recipe.ingredients) ===
+    //     JSON.stringify(this.recipe.ingredients)
+    // );
     if (
       this.recipe.description === recipe.description &&
       this.recipe.imagePath === recipe.imagePath &&

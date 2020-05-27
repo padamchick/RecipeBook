@@ -1,10 +1,12 @@
-table {
+.mat-table {
   width: 100%;
   margin-bottom: 10px;
+  overflow: auto;
 }
 
 .mat-row.highlighted {
   background: rgb(239, 239, 239);
+  text-decoration: line-through;
 }
 
 .mat-row.hovered {
@@ -21,5 +23,63 @@ button.active:focus {
   outline: none !important;
   outline-style: none !important;
 }
+
+
+@media all and (min-width: 600px)
+ {
+  #add-button{
+    position: relative;
+    top: auto;
+    right: -92%;
+    top: -40px;
+    bottom: 10%;
+    left: auto;
+  }
+
+  .mat-column-select {
+    flex: 0 0 10%;
+  }
+  .mat-column-name {
+    flex: 0 0 45%;
+  }
+  .mat-column-amount {
+    flex: 0 0 12%;
+  }
+  .mat-column-unit {
+    flex: 0 0 13%;
+  }
+  .mat-column-action {
+    flex: 0 0 20%;
+  }
+ }
+
+@media all and (max-width: 599px){
+  #add-button{
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+  }
+
+  .mat-column-select {
+    flex: 0 0 18%;
+  }
+  .mat-column-name {
+    flex: 0 0 31%;
+  }
+  .mat-column-amount {
+    flex: 0 0 10%;
+  }
+  .mat-column-unit {
+    flex: 0 0 14%;
+  }
+  .mat-column-action {
+    flex: 0 0 27%;
+  }
+}
+
+.mat-checkbox {
+  margin-top: 7px;
+}
+
 
 

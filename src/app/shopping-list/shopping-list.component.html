@@ -1,19 +1,19 @@
-<div class="col-xs-12 col-xl-10 offset-xl-1" >
-    <table *ngIf="ingredients.length > 0" mat-table [dataSource]="dataSource" matSort>
+<div class="col-xs-12 col-xl-10 offset-xl-1">
+    <table mat-table [dataSource]="dataSource" matSort>
       <!-- Checkbox Column -->
       <ng-container matColumnDef="select">
-        <th mat-header-cell *matHeaderCellDef matSort>
+        <mat-header-cell *matHeaderCellDef>
           <mat-checkbox (change)="$event ? masterToggle() : null;" [checked]="selection.hasValue() && isAllSelected()"
             [indeterminate]="selection.hasValue() && !isAllSelected()" class="dark-blue-checkbox">
           </mat-checkbox>
-        </th>
-        <td mat-cell *matCellDef="let row; let i=index" matSort>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row; let i=index">
           <mat-checkbox [(ngModel)]="row.isSelected"
             (click)="$event.stopPropagation()"
             (change)="$event ? selection.toggle(row) : null;"
             [checked]="selection.isSelected(row)">
           </mat-checkbox>
-        </td>
+        </mat-cell>
       </ng-container>
 
 
@@ -26,50 +26,54 @@
 
       <!-- Name Column -->
       <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef> Name </th>
-        <td mat-cell *matCellDef="let element"> {{element.name.toUpperCase()}} </td>
+        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.name | lowercase}} </mat-cell>
       </ng-container>
 
       <!-- Amount Column -->
       <ng-container matColumnDef="amount">
-        <th mat-header-cell *matHeaderCellDef> Amount </th>
-        <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
+        <mat-header-cell *matHeaderCellDef> Amount </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.amount}} </mat-cell>
       </ng-container>
 
       <!-- Unit Column -->
       <ng-container matColumnDef="unit">
-        <th mat-header-cell *matHeaderCellDef> Unit </th>
-        <td mat-cell *matCellDef="let element"> {{element.unit}} </td>
+        <mat-header-cell *matHeaderCellDef> Unit </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.unit}} </mat-cell>
       </ng-container>
 
       <!-- Action Column -->
       <ng-container matColumnDef="action">
-        <th mat-header-cell *matHeaderCellDef> Actions </th>
-        <td mat-cell *matCellDef="let element; let i=index" (click)="$event.stopPropagation()">
-          <button mat-icon-button (click)="onEdit(element, i)">
-            <mat-icon>edit</mat-icon>
-          </button>
-          <button mat-icon-button class="mat-red-icon" (click)="onDelete(element, i)">
-            <mat-icon>delete</mat-icon>
-          </button>
-        </td>
+        <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+        <mat-cell *matCellDef="let element; let i=index" (click)="$event.stopPropagation()">
+          <div fxLayout>
+            <button mat-icon-button matTooltip="Edit ingredient" matTooltipPosition="above" (click)="editIngredient(element, i)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button matTooltip="Delete ingredient" matTooltipPosition="above" class="mat-red-icon" (click)="deleteIngredient(element, i)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+
+        </mat-cell>
       </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; let i=index; columns: displayedColumns;"
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; let i=index; columns: displayedColumns;"
         [ngClass]="{hovered: row.hovered && !selection.isSelected(row), highlighted: selection.isSelected(row)}"
         (mouseover)="row.hovered = true" (mouseout)="row.hovered = false"
-        (click)="selection.toggle(row); onToggle(i, selection.isSelected(row))"></tr>
+        (click)="selection.toggle(row); onToggle(i, selection.isSelected(row))"></mat-row>
     </table>
-    <button mat-raised-button class="mat-yellow" (click)="onSave()">Save</button>
+    <button mat-fab class="theme-accent-dark sticky" id="add-button" matTooltip="Add new ingredient" matTooltipPosition="above" (click)="addIngredient()"><i class="material-icons" >add_shopping_cart</i></button>
+    <!-- <button mat-raised-button class="mat-yellow" (click)="onSave()">Save</button> -->
 
 
-    <div *ngIf="ingredients.length > 0" style="margin: 15px 0;">
+    <!-- <div *ngIf="ingredients.length > 0" style="margin: 15px 0;">
       -{{shoppingListService.getIngredients()[0].isSelected}}-
       <div *ngFor="let ingredient of ingredients">
         {{ingredient.name}}: {{ingredient.isSelected}}
       </div>
-    </div>
+    </div> -->
 
   </div>
 <!-- <mat-selection-list #list [(ngModel)]="selectedOptions" (ngModelChange)="onNgModelChange($event)">
@@ -102,3 +106,4 @@
 
 <!-- </div>
 </div> -->
+

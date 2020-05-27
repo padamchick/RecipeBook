@@ -1,4 +1,8 @@
 
+.container {
+  margin-bottom: 10px;
+}
+
 button:focus, button:active:focus, button.active:focus {
   outline: none !important;
   outline-style: none !important;

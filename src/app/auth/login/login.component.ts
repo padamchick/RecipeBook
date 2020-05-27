@@ -29,13 +29,13 @@ export class LoginComponent{
 
     this.authService.login(email, password).subscribe(
       (responsedata) => {
-        console.log(responsedata);
+        // console.log(responsedata);
       this.authService.isLoading.next(false);
       this.router.navigate(['./recipes'])
       },
       errorMessage => {
         // console.log(errorMessage);
-        console.log('Handle error');
+        // console.log('Handle error');
         this.error = errorMessage;
         this.authService.isLoading.next(false);
       }

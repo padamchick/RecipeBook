@@ -6,7 +6,6 @@ import { FormsModule } from '@angular/forms';
 import { ShoppingListRoutingModule } from './shopping-list-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { TableComponent } from './table/table.component';
-import { SortPipe } from './sort.pipe';
 
 
 
@@ -14,8 +13,7 @@ import { SortPipe } from './sort.pipe';
   declarations: [
     ShoppingListComponent,
     ShoppingEditComponent,
-    TableComponent,
-    SortPipe
+    TableComponent
   ],
   imports: [
     RouterModule,

@@ -30,43 +30,87 @@
       </div>
 
       <div class="col-xs-12">
-        <div class="d-flex w-100 justify-content-start align-items-center">
-          <button mat-icon-button class="mat-green-icon" type="button" (click)="onAddIngredient()">
-            <mat-icon>add_shopping_cart</mat-icon>
-          </button>
-          Ingredients
-        </div>
 
-        <div *ngIf="recipe.ingredients" class="card">
-          <div fxLayout="column">
-            <div *ngFor="let ingredient of recipe.ingredients; let i = index" fxLayout="row" fxLayoutGap="1%"
-              class="example-form">
-              <mat-form-field style="min-width: 52%; width: auto;">
-                <mat-label>Name</mat-label>
-                <input matInput [name]="'name_'+i" [(ngModel)]="recipe.ingredients[i].name">
-              </mat-form-field>
 
-              <mat-form-field style="min-width: 20%; width: auto;">
-                <mat-label>Amount</mat-label>
-                <input matInput type="number" step="0.1" [name]="'amount_'+i"
-                  [(ngModel)]="recipe.ingredients[i].amount">
-              </mat-form-field>
-              <mat-form-field style="min-width: 20%; width: auto;">
-                <mat-label>Unit</mat-label>
-                <input matInput type="text" [name]="'unit_'+i" [(ngModel)]="recipe.ingredients[i].unit">
-              </mat-form-field>
-              <div class="d-flex w-100 justify-content-start align-items-center">
-                <button mat-icon-button color="warn" type="button" (click)="onDelete(i)">
-                  <mat-icon>remove_circle_outline</mat-icon>
-                </button>
-              </div>
-            </div>
+        <!-- <div *ngIf="recipe.ingredients.length > 0" class="card">
+          <div fxFlex fxLayout="column"> -->
+            <mat-card-title class="d-flex align-items-center">
+              <mat-icon>shopping_cart</mat-icon>
+              Ingredients
+            </mat-card-title>
+
+            <mat-card>
+              <mat-card-header>
+
+              </mat-card-header>
+              <mat-card-content *ngIf="this.recipe.ingredients.length>0">
+            <table mat-table [dataSource]="dataSource">
+
+              <!-- Position Column -->
+              <!--
+              <ng-container matColumnDef="position">
+                <th mat-header-cell *matHeaderCellDef> No. </th>
+                <td mat-cell *matCellDef="let element; let i = index"> {{i+1}} </td>
+              </ng-container> -->
+
+              <!-- Name Column -->
+              <ng-container matColumnDef="name">
+                <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.name | lowercase}} </mat-cell>
+              </ng-container>
+
+              <!-- Amount Column -->
+              <ng-container matColumnDef="amount">
+                <mat-header-cell *matHeaderCellDef> Amount </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.amount}} </mat-cell>
+              </ng-container>
+
+              <!-- Unit Column -->
+              <ng-container matColumnDef="unit">
+                <mat-header-cell *matHeaderCellDef> Unit </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.unit}} </mat-cell>
+              </ng-container>
+
+              <!-- Action Column -->
+              <ng-container matColumnDef="action">
+                <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+                <mat-cell *matCellDef="let element; let i=index" (click)="$event.stopPropagation()">
+                  <div fxLayout>
+                    <button type="button" mat-icon-button matTooltip="Edit ingredient" matTooltipPosition="above" (click)="editIngredient(element, i)">
+                      <mat-icon>edit</mat-icon>
+                    </button>
+                    <button type="button" mat-icon-button matTooltip="Delete ingredient" matTooltipPosition="above" class="mat-red-icon" (click)="deleteIngredient(element, i)">
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                  </div>
+
+                </mat-cell>
+              </ng-container>
+
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; let i=index; columns: displayedColumns;"></mat-row>
+            </table>
+            </mat-card-content>
+            <button type="button" mat-mini-fab class="theme-accent-dark sticky" id="add-button" matTooltip="Add new ingredient" matTooltipPosition="above" (click)="addIngredient()"><i class="material-icons" >add_shopping_cart</i></button>
+          </mat-card>
           </div>
-        </div>
-      </div>
-      <button mat-raised-button class="mat-green" type="submit">Save</button>
-      <button mat-raised-button class="mat-warn" type="button" (click)="onCancel()">Cancel</button>
+          <br>
+          <div fxLayout fxLayoutAlign="flex-start center">
+            <button type="button" mat-raised-button class="theme-accent-dark" type="submit">
+              <div fxLayout fxLayoutAlign="center center" fxLayoutGap="5px">
+                <mat-icon>save</mat-icon>
+                <span>Save</span>
+              </div>
+            </button>
+            <button type="button" mat-raised-button class="mat-warn" type="button" (click)="onCancel()">
+              <div fxLayout fxLayoutAlign="center center" fxLayoutGap="5px">
+                <mat-icon>clear</mat-icon>
+                <span>Cancel</span>
+              </div>
+            </button>
+          </div>
 
     </form>
+    <br>
   </div>
 </div>

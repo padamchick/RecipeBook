@@ -57,7 +57,7 @@ export class DataStorageService {
         ingredients
       )
       .subscribe((response) => {
-         console.log(response);
+        //  console.log(response);
       });
   }
 
