@@ -61,24 +61,21 @@ export class ShoppingListComponent
       .filter((ingredient) => !ingredient.isSelected)
       .forEach((ing) => (ing.isSelected = false));
 
-    // filtrujemy skladniki z selected = true
-    this.initialSelection = this.ingredients.filter(
-      (ingredient) => ingredient.isSelected
-    );
-    this.selection = new SelectionModel<Ingredient>(
-      true,
-      this.initialSelection
-    );
+    // uaktualnij zaznaczenia checkboxow
+    this.updateSelection();
+
+    this.dataSource = new MatTableDataSource(this.ingredients);
 
     // uaktualniaj po kazdej zmianie w skladnikach
     this.ingredientsChangeSub = this.shoppingListService.ingredientsChanged.subscribe(
       (ingredients: Ingredient[]) => {
         // this.ingredients = ingredients;
         this.ingredients = JSON.parse(JSON.stringify(ingredients));
+        // zaaktualizuj wyswietlana tabele
         this.dataSource = new MatTableDataSource(this.ingredients);
+        this.updateSelection();
       }
     );
-    this.dataSource = new MatTableDataSource(this.ingredients);
   }
 
   // onSort() {
@@ -192,6 +189,16 @@ export class ShoppingListComponent
         this.shoppingListService.deleteIngredient(i);
         this.dataService.storeIngredients();
       });
+  }
+
+  updateSelection() {
+    this.initialSelection = this.ingredients.filter(
+      (ingredient) => ingredient.isSelected
+    );
+    this.selection = new SelectionModel<Ingredient>(
+      true,
+      this.initialSelection
+    );
   }
 
   onSave() {
